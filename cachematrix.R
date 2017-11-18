@@ -29,7 +29,7 @@ makeCacheMatrix <- function(x = matrix()) {
 ## Note : matrix x * inverse matrix x = I 
 ##        only square matrix can make the inverse matrix
 ##        some square matrix may not make the inverse matrix
-##        we can ckeck these function use solve() with inverse matrix x ... should be matrix x 
+##        we can ckeck these function use solve() with inverse matrix x ... should return matrix x 
 
 cacheSolve <- function(x, ...) {
       m <- x$getinv()
@@ -43,3 +43,24 @@ cacheSolve <- function(x, ...) {
       m 
 }       
 
+## Check  
+## solve(inverse matrix x) = matrix x
+## > x
+## [,1] [,2] [,3]
+## [1,]    1    3    2
+## [2,]    3    2    5
+## [3,]    4    5    8
+
+##  > inverseX <- cacheSolve(makeCacheMatrix(x))
+##  > inverseX
+## [,1] [,2]       [,3]
+## [1,]  1.2857143    2 -1.5714286
+## [2,]  0.5714286    0 -0.1428571
+## [3,] -1.0000000   -1  1.0000000
+
+## > y <- solve(inverseX)
+## [,1] [,2] [,3]
+## [1,]    1    3    2
+## [2,]    3    2    5
+## [3,]    4    5    8
+## matrix y = matrix x
